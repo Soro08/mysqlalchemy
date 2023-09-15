@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "click_tutorial"
+version = "0.1.0"
+description = "A tutorial about using click"
+authors = ["le_woudar <XXX@XX>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+click = "^7.1.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry.scripts]
+hello = "scripts.hello:cli"
