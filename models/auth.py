@@ -56,10 +56,17 @@ def auto_login(session):
     # Vérification de l'authentification au lancement suivant
     session_id = recuperer_session()
     if session_id:
-        print("Authentification automatique avec la session :", session_id)
         return session_id.split("_")[1]
     else:
         print("Aucune session trouvée. Veuillez vous authentifier.")
+        return None
+
+
+def is_admin(session, user_id):
+    utilisateur = session.query(Utilisateur).filter_by(id=user_id).one()
+    if utilisateur:
+        return utilisateur.role
+    else:
         return None
 
 
@@ -67,3 +74,7 @@ def logout_user():
     if os.path.exists(SESSION_FILE):
         os.remove(SESSION_FILE)
     print("User has been succefull logout!")
+
+
+def admin_required(session):
+    return auto_login(session) and is_admin(session, auto_login(session)) == "admin"
